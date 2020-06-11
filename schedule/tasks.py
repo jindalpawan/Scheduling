@@ -5,15 +5,9 @@ from celery import shared_task,current_task, task
 from hero.celery import app
 
 
+temp=0
 
 @app.task
 def hello():
-	x()
-	return "abx"
-
-def x():
-	print("xchjkl")
-
-
-if __name__ == '__main__':
-    app.start()
+	temp=1
+	return 1

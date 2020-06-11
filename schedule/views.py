@@ -11,21 +11,23 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, DetailView
 from django.utils import timezone
 from datetime import datetime, timedelta
-from .tasks import hello
+from .tasks import hello, temp
 
-
+'''
 class Home(TemplateView):
 	def get(self, request):
 		print((datetime.now()+timedelta(minutes=1)))
-		r=hello.apply_async(eta=(datetime.now()))
-		print(r, "sdffdsawed")
-		return HttpResponse("aa")
-
+		hello.apply_async(eta=(datetime.now()+timedelta(minutes=1)))
+		return HttpResponse()
 '''
+
 class Home(APIView):
-	permission_classes = (IsAuthenticated,)
 	def get(self, request):
 		data=json.dumps(request.data)
 		data=json.loads(data)
-		return Response(serializer)
-'''
+		hello.apply_async(eta=data["datetime"])
+		if temp:
+			dic={'response':"Success"}
+		else:
+			dic={'response':"Failed"}
+		return Response(dic)
