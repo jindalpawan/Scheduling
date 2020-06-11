@@ -1,11 +1,8 @@
 import os
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.views import APIView
 import json
-from django.views.generic import TemplateView, DetailView
-from django.utils import timezone
 from datetime import datetime, timedelta
 from .tasks import test_sample
 
